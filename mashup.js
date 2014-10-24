@@ -9,25 +9,30 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     testAPI();
-    FB.api(
-      "/me/home",
-      function (response) {
-        if (response && !response.error) {
-        	var ul = document.createElement('ul');
-        	var body = document.getElementById('body');
-        	for (var i in response['data']) {
-        		if (response['data'][i].type === 'status') {
-  	      		if (response['data'][i].hasOwnProperty('message')) {
-  	      			var li = document.createElement('li');
-  			      	li.appendChild(document.createTextNode(response['data'][i]['message']));
-  			      	ul.appendChild(li);
-  			      }
-  			    }
-  	      }
-  	    body.appendChild(ul);
+    var count = 0;
+    var currentpage = "/me/home"
+    while(count < 2) {
+      FB.api(
+        currentpage,
+        function (response) {
+          if (response && !response.error) {
+          	var ul = document.createElement('ul');
+          	var body = document.getElementById('body');
+          	for (var i in response['data']) {
+          		if (response['data'][i].type === 'status') {
+    	      		if (response['data'][i].hasOwnProperty('message')) {
+    	      			var li = document.createElement('li');
+    			      	li.appendChild(document.createTextNode(response['data'][i]['message']));
+    			      	ul.appendChild(li);
+    			      }
+    			    }
+    	      }
+    	    body.appendChild(ul);
+          currentpage = response.paging.next;
+          }
         }
-      }
-    );
+      );
+    }
 
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
@@ -72,6 +77,7 @@ window.fbAsyncInit = function() {
   // These three cases are handled in the callback function.
 
   FB.getLoginStatus(function(response) {
+    console.log(response);
     statusChangeCallback(response);
   });
 
@@ -95,10 +101,4 @@ function testAPI() {
     document.getElementById('status').innerHTML =
       'Thanks for logging in, ' + response.name + '!';
   });
-}
-
-function getMoreResults(posts) {
-  if (posts.paging !== undefined) {
-      return posts.paging.next;
-    }
 }
