@@ -11,7 +11,7 @@ function statusChangeCallback(response) {
     testAPI();
     var count = 0;
     var currentpage = "/me/home"
-    while(count < 1) {
+    //while(count < 1) {
       FB.api(
         currentpage,
         function (response) {
@@ -28,12 +28,12 @@ function statusChangeCallback(response) {
     			    }
     	      }
     	    body.appendChild(ul);
-          currentpage = response.paging.next;
+          //currentpage = response.paging.next;
           }
         }
       );
       count += 1;
-    }
+    //}
 
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
