@@ -10,10 +10,7 @@ function statusChangeCallback(response) {
     // Logged into your app and Facebook.
     testAPI();
     var count = 0;
-    var currentpage = "/me/home"
-    for (var i = 0 ; i < 3; i++) {
-      FB.api(currentpage, getPosts);
-    }
+    FB.api("/me/home", getPosts);
       
     //}
 
