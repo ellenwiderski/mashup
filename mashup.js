@@ -14,7 +14,7 @@ function statusChangeCallback(response) {
     var count = 0;
     var currenttime = new Date();
     var weekAgo = currenttime.getTime() - 604800000;
-    FB.api("/me/home?limit=500",
+    FB.api("/me/home?limit=10",
           function(response) {
             if (response && !response.error) {
               var ul = document.createElement('ul');
