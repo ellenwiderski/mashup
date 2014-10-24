@@ -101,14 +101,7 @@ function getPosts(response) {
   }
   if (pageNumber < 3) {
     nextPage = response.paging.next;
-    console.log(nextPage);
-    xmlHttp = new XMLHttpRequest();
-    // xmlHttp.onreadystatechange = function() {
-    //   if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-    //       console.log("Hello!")
-    //     }
-    //   }
-    xmlHttp.open("GET", nextPage, true);
+    FB.api('/me/home',getPosts);
     pageNumber++;
   }
 }
