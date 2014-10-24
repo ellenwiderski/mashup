@@ -1,3 +1,18 @@
+getPosts = function(response) {
+  if (response && !response.error) {
+    var ul = document.createElement('ul');
+    var body = document.getElementById('body');
+    for (var i in response['data']) {
+      if (response['data'][i].hasOwnProperty('location')) {
+        console.log(response);
+        //var li = document.createElement('li');
+        //li.appendChild(document.createTextNode(response['data'][i]['message']));
+        //ul.appendChild(li);
+      }
+    }
+  body.appendChild(ul);
+  }
+}
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
   console.log('statusChangeCallback');
@@ -81,20 +96,4 @@ function testAPI() {
     document.getElementById('status').innerHTML =
       'Thanks for logging in, ' + response.name + '!';
   });
-}
-
-getPosts = function(response) {
-  if (response && !response.error) {
-    var ul = document.createElement('ul');
-    var body = document.getElementById('body');
-    for (var i in response['data']) {
-      if (response['data'][i].hasOwnProperty('location')) {
-        console.log(response);
-        //var li = document.createElement('li');
-        //li.appendChild(document.createTextNode(response['data'][i]['message']));
-        //ul.appendChild(li);
-      }
-    }
-  body.appendChild(ul);
-  }
 }
