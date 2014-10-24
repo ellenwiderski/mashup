@@ -1,18 +1,3 @@
-getPosts = function(response) {
-  if (response && !response.error) {
-    var ul = document.createElement('ul');
-    var body = document.getElementById('body');
-    for (var i in response['data']) {
-      if (response['data'][i].hasOwnProperty('location')) {
-        console.log(response);
-        //var li = document.createElement('li');
-        //li.appendChild(document.createTextNode(response['data'][i]['message']));
-        //ul.appendChild(li);
-      }
-    }
-  body.appendChild(ul);
-  }
-}
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
   console.log('statusChangeCallback');
@@ -27,7 +12,23 @@ function statusChangeCallback(response) {
     var count = 0;
     var currenttime = new Date();
     var weekAgo = currenttime.getTime() - 604800000;
-    FB.api("/me/home?limit=100", function(response) { getPosts(response);});
+    FB.api("/me/home?limit=100",
+          function(response) {
+            if (response && !response.error) {
+              var ul = document.createElement('ul');
+              var body = document.getElementById('body');
+              for (var i in response['data']) {
+                if (response['data'][i].hasOwnProperty('location')) {
+                  console.log(response);
+                  //var li = document.createElement('li');
+                  //li.appendChild(document.createTextNode(response['data'][i]['message']));
+                  //ul.appendChild(li);
+                }
+              }
+            body.appendChild(ul);
+            }
+          }
+      );
 
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
