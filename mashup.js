@@ -8,12 +8,12 @@ function statusChangeCallback(response) {
   // for FB.getLoginStatus().
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
-    console.log(response);
     testAPI();
     var count = 0;
     var currentpage = "/me/home"
+    for (var i = 0 ; i < 1; i++) {
       FB.api(
-        response.paging.next,
+        currentpage,
         function (response) {
           if (response && !response.error) {
           	var ul = document.createElement('ul');
@@ -28,11 +28,12 @@ function statusChangeCallback(response) {
     			    }
     	      }
     	    body.appendChild(ul);
-          //currentpage = response.paging.next;
+          currentpage = response.paging.next;
           }
         }
       );
-      //count += 1;
+    }
+      
     //}
 
   } else if (response.status === 'not_authorized') {
