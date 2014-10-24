@@ -1,3 +1,5 @@
+//FACEBOOK
+
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
   console.log('statusChangeCallback');
@@ -12,17 +14,18 @@ function statusChangeCallback(response) {
     var count = 0;
     var currenttime = new Date();
     var weekAgo = currenttime.getTime() - 604800000;
-    FB.api("/me/home?limit=100",
+    FB.api("/me/home?limit=500",
           function(response) {
             if (response && !response.error) {
               var ul = document.createElement('ul');
               var body = document.getElementById('body');
               for (var i in response['data']) {
                 if (response['data'][i].hasOwnProperty('place')) {
-                  console.log(response[i]);
                   var li = document.createElement('li');
                   li.appendChild(document.createTextNode(response.data[i].from.name));
                   li.appendChild(document.createTextNode(response.data[i].place.name));
+                  li.appendChild(document.createTextNode(response.data[i].place.latitude));
+                  li.appendChild(document.createTextNode(response.data[i].place.longitude));
                   ul.appendChild(li);
                 }
               }
@@ -99,3 +102,16 @@ function testAPI() {
       'Thanks for logging in, ' + response.name + '!';
   });
 }
+
+
+// GOOGLE MAPS
+
+function initialize() {
+  var mapOptions = {
+    center: { lat: -34.397, lng: 150.644},
+    zoom: 8
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+}
+google.maps.event.addDomListener(window, 'load', initialize);

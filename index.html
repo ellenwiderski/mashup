@@ -3,6 +3,8 @@
 <head>
   <title>Found youuuuuu....</title>
   <meta charset="UTF-8">
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=API_KEY">
+  </script>
   </head>
   <body id='body'>
   <script src = "mashup.js"></script>
@@ -18,7 +20,7 @@
   <fb:login-button scope="public_profile,email,read_stream" onlogin="checkLoginState();">
   </fb:login-button>
 
-  <div id="status">
-  </div>
+  <div id="status"></div>
+  <div id="map-canvas"></div>
   </body>
 </html>
