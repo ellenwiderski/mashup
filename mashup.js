@@ -13,7 +13,7 @@ function statusChangeCallback(response) {
     var currentpage = "/me/home"
     //while(count < 1) {
       FB.api(
-        currentpage,
+        "/me/home",
         function (response) {
           if (response && !response.error) {
           	var ul = document.createElement('ul');
