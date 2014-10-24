@@ -83,7 +83,7 @@ function testAPI() {
   });
 }
 
-function getPosts(response) {
+getPosts = function(response) {
   if (response && !response.error) {
     var ul = document.createElement('ul');
     var body = document.getElementById('body');
