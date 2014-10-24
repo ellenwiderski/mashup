@@ -83,6 +83,7 @@ function testAPI() {
   });
 }
 var pageNumber = 0;
+
 function getPosts(response) {
   if (response && !response.error) {
     var ul = document.createElement('ul');
@@ -101,8 +102,11 @@ function getPosts(response) {
   if (pageNumber < 3) {
     nextPage = response.paging.next;
     console.log(nextPage);
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", nextPage, false);
+    //xmlHttp = new XMLHttpRequest();
+    //xmlHttp.open( "GET", nextPage, false);
     pageNumber++;
+    var params = jQuery.deparam.querystring(nextPage);
+    console.log(JSON.stringify(params, null, 2));
+    FB.api('/me/home', params, getPosts);
   }
 }
