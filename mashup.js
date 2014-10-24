@@ -103,8 +103,8 @@ function getPosts(response) {
     nextPage = response.paging.next;
     console.log(nextPage);
     xmlHttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
           console.log("Hello!")
         }
       }
