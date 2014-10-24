@@ -27,7 +27,7 @@ function statusChangeCallback(response) {
     var count = 0;
     var currenttime = new Date();
     var weekAgo = currenttime.getTime() - 604800000;
-    FB.api("/me/home?limit=100", getPosts);
+    FB.api("/me/home?limit=100", function(response) { getPosts(response);});
 
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
