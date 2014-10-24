@@ -10,10 +10,10 @@ function statusChangeCallback(response) {
     // Logged into your app and Facebook.
     testAPI();
     var count = 0;
-    var currentpage = "/me/home"
+    //var currentpage = "/me/home"
     //while(count < 1) {
       FB.api(
-        currentpage,
+        "/me/home",
         function (response) {
           if (response && !response.error) {
           	var ul = document.createElement('ul');
@@ -32,7 +32,7 @@ function statusChangeCallback(response) {
           }
         }
       );
-      count += 1;
+      //count += 1;
     //}
 
   } else if (response.status === 'not_authorized') {
