@@ -24,8 +24,8 @@ function statusChangeCallback(response) {
                   var li = document.createElement('li');
                   li.appendChild(document.createTextNode(response.data[i].from.name));
                   li.appendChild(document.createTextNode(response.data[i].place.name));
-                  li.appendChild(document.createTextNode(response.data[i].place.latitude));
-                  li.appendChild(document.createTextNode(response.data[i].place.longitude));
+                  li.appendChild(document.createTextNode(response.data[i].place.location.latitude));
+                  li.appendChild(document.createTextNode(response.data[i].place.location.longitude));
                   ul.appendChild(li);
                 }
               }
