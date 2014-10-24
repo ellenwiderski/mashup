@@ -46,7 +46,6 @@ function statusChangeCallback(response) {
 function checkLoginState() {
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
-    statusChangeCallback(getMoreResults(response));
   });
 }
 
@@ -73,6 +72,7 @@ FB.init({
 
 FB.getLoginStatus(function(response) {
   statusChangeCallback(response);
+  statusChangeCallback(getMoreResults(response));
 });
 
 };
