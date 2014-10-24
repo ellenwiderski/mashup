@@ -8,7 +8,7 @@ function statusChangeCallback(response) {
   // for FB.getLoginStatus().
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
-    console.log(repsonse);
+    console.log(response);
     testAPI();
     var count = 0;
     var currentpage = "/me/home"
