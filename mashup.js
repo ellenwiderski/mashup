@@ -12,7 +12,7 @@ function statusChangeCallback(response) {
     var count = 0;
     var currenttime = new Date();
     var weekAgo = currenttime.getTime() - 604800000;
-    FB.api("/me/home?limit=100&since="+weekago, getPosts);
+    FB.api("/me/home?limit=100&since="+weekAgo, getPosts);
       
     //}
 
