@@ -11,7 +11,7 @@ function statusChangeCallback(response) {
     testAPI();
     var count = 0;
     var currentpage = "/me/home"
-    for (var i = 0 ; i < 1; i++) {
+    for (var i = 0 ; i < 2; i++) {
       FB.api(
         currentpage,
         function (response) {
