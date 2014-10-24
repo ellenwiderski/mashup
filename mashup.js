@@ -32,6 +32,7 @@ function statusChangeCallback(response) {
           }
         }
       );
+      count += 1;
     }
 
   } else if (response.status === 'not_authorized') {
