@@ -13,7 +13,7 @@ function statusChangeCallback(response) {
     var count = 0;
     var currentpage = "/me/home"
       FB.api(
-        "/me/home",
+        response.paging.next,
         function (response) {
           if (response && !response.error) {
           	var ul = document.createElement('ul');
