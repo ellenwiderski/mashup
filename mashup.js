@@ -10,7 +10,9 @@ function statusChangeCallback(response) {
     // Logged into your app and Facebook.
     testAPI();
     var count = 0;
-    FB.api("/me/home", getPosts);
+    var currenttime = new Date();
+    var weekAgo = currenttime.getTime() - 604800000;
+    FB.api("/me/home?limit=100&since="+weekago, getPosts);
       
     //}
 
@@ -98,10 +100,5 @@ function getPosts(response) {
       }
     }
   body.appendChild(ul);
-  }
-  if (pageNumber < 3) {
-    nextPage = response.paging.next;
-    FB.api('/me/home',getPosts);
-    pageNumber++;
   }
 }
