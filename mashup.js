@@ -9,25 +9,26 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     testAPI();
-  FB.api(
-    "/me/home",
-    function (response) {
-      if (response && !response.error) {
-      	var ul = document.createElement('ul');
-      	var body = document.getElementById('body');
-      	for (var i in response['data']) {
-      		if (response['data'][i].type === 'status') {
-	      		if (response['data'][i].hasOwnProperty('message')) {
-	      			var li = document.createElement('li');
-			      	li.appendChild(document.createTextNode(response['data'][i]['message']));
-			      	ul.appendChild(li);
-			    }
-			}
-	      }
-	    body.appendChild(ul);
+    FB.api(
+      "/me/home",
+      function (response) {
+        if (response && !response.error) {
+        	var ul = document.createElement('ul');
+        	var body = document.getElementById('body');
+        	for (var i in response['data']) {
+        		if (response['data'][i].type === 'status') {
+  	      		if (response['data'][i].hasOwnProperty('message')) {
+  	      			var li = document.createElement('li');
+  			      	li.appendChild(document.createTextNode(response['data'][i]['message']));
+  			      	ul.appendChild(li);
+  			      }
+  			    }
+  	      }
+  	    body.appendChild(ul);
+        }
       }
-    }
-  );
+    );
+
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
     document.getElementById('status').innerHTML = 'Please log ' +
@@ -50,30 +51,29 @@ function checkLoginState() {
 }
 
 window.fbAsyncInit = function() {
-FB.init({
-  appId      : '1396726507284343',
-  cookie     : true,  // enable cookies to allow the server to access 
-                      // the session
-  xfbml      : true,  // parse social plugins on this page
-  version    : 'v2.1' // use version 2.1
-});
+  FB.init({
+    appId      : '1396726507284343',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.1' // use version 2.1
+  });
 
-// Now that we've initialized the JavaScript SDK, we call 
-// FB.getLoginStatus().  This function gets the state of the
-// person visiting this page and can return one of three states to
-// the callback you provide.  They can be:
-//
-// 1. Logged into your app ('connected')
-// 2. Logged into Facebook, but not your app ('not_authorized')
-// 3. Not logged into Facebook and can't tell if they are logged into
-//    your app or not.
-//
-// These three cases are handled in the callback function.
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
 
-FB.getLoginStatus(function(response) {
-  statusChangeCallback(response);
-  statusChangeCallback(getMoreResults(response));
-});
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
 
 };
 
