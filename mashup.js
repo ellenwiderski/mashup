@@ -12,27 +12,7 @@ function statusChangeCallback(response) {
     var count = 0;
     var currentpage = "/me/home"
     for (var i = 0 ; i < 3; i++) {
-      FB.api(
-        currentpage,
-        function (response) {
-          if (response && !response.error) {
-          	var ul = document.createElement('ul');
-          	var body = document.getElementById('body');
-          	for (var i in response['data']) {
-          		if (response['data'][i].type === 'status') {
-    	      		if (response['data'][i].hasOwnProperty('message')) {
-    	      			var li = document.createElement('li');
-    			      	li.appendChild(document.createTextNode(response['data'][i]['message']));
-    			      	ul.appendChild(li);
-    			      }
-    			    }
-    	      }
-    	    body.appendChild(ul);
-          currentpage = response.paging.next;
-          }
-        }
-      );
-      console.log(currentpage)
+      FB.api(currentpage, getPosts);
     }
       
     //}
@@ -104,4 +84,28 @@ function testAPI() {
     document.getElementById('status').innerHTML =
       'Thanks for logging in, ' + response.name + '!';
   });
+}
+var pageNumber = 0;
+function getPosts(response) {
+  if (response && !response.error) {
+    var ul = document.createElement('ul');
+    var body = document.getElementById('body');
+    for (var i in response['data']) {
+      if (response['data'][i].type === 'status') {
+        if (response['data'][i].hasOwnProperty('message')) {
+          var li = document.createElement('li');
+          li.appendChild(document.createTextNode(response['data'][i]['message']));
+          ul.appendChild(li);
+        }
+      }
+    }
+  body.appendChild(ul);
+  }
+  if (pageNumber < 3) {
+    nextPage = response.paging.next;
+    console.log(nextPage);
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", nextPage, false);
+    pageNumber++;
+  }
 }
