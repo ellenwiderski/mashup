@@ -32,6 +32,7 @@ function statusChangeCallback(response) {
           }
         }
       );
+      console.log(currentpage)
     }
       
     //}
