@@ -155,16 +155,13 @@ var infoWindow = new google.maps.InfoWindow(), marker, i;
       });
       
       // Allow each marker to have an info window    
+
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
-          return function() {
-              if (marker[i].hasOwnProperty('message')) {
-                infoWindow.setContent('<div class="info_content">' +
-                      '<h3>'+markers[i].friendname+'</h3>' +
-                      '<p> "'+markers[i].message+'"</p>' + '</div>');
-              }
-              infoWindow.open(map, marker);
-          }
-      })(marker, i));
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+            }
+        })(marker, i));
 
       // Automatically center the map fitting all markers on the screen
       map.fitBounds(bounds);
