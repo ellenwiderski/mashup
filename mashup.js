@@ -158,5 +158,5 @@ function loadMarkers(markers) {
 
       // Automatically center the map fitting all markers on the screen
       map.fitBounds(bounds);
+  }
 }
-
