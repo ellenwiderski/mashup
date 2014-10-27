@@ -133,13 +133,14 @@ function initialize() {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-  
-  var bounds = new google.maps.LatLngBounds();
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
 function loadMarkers(markers) {
+
+  var bounds = new google.maps.LatLngBounds();
+  
   // Loop through our array of markers & place each one on the map  
   for( i = 0; i < markers.length; i++ ) {
       var position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
