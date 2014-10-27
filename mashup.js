@@ -140,30 +140,39 @@ function loadMarkers(markers) {
     
 // Display multiple markers on a map
 var infoWindow = new google.maps.InfoWindow(), marker, i;
+var infoWindowContent = [];
 
+for (i = 0; i < markers.length; i++) {
 
-  // Loop through our array of markers & place each one on the map  
-  for( i = 0; i < markers.length; i++ ) {
+  if (marker[i].hasOwnProperty('message')) {
+    infoWindowContent.push('<div class="info_content">' +
+          '<h3>'+markers[i].friendname+'</h3>' +
+          '<p> "'+markers[i].message+'"</p>' + '</div>');
+  }
+}
 
-      var position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
-      bounds.extend(position);
+// Loop through our array of markers & place each one on the map  
+for( i = 0; i < markers.length; i++ ) {
 
-      marker = new google.maps.Marker({
-          position: position,
-          map: map,
-          title: markers[i].placename
-      });
-      
-      // Allow each marker to have an info window    
+    var position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
+    bounds.extend(position);
 
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infoWindow.setContent(infoWindowContent[i][0]);
-                infoWindow.open(map, marker);
-            }
-        })(marker, i));
+    marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        title: markers[i].placename
+    });
+    
+    // Allow each marker to have an info window    
 
-      // Automatically center the map fitting all markers on the screen
-      map.fitBounds(bounds);
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+              infoWindow.setContent(infoWindowContent[i]);
+              infoWindow.open(map, marker);
+          }
+      })(marker, i));
+
+    // Automatically center the map fitting all markers on the screen
+    map.fitBounds(bounds);
   }
 }
