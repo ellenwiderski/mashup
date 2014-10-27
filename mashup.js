@@ -38,7 +38,7 @@ function statusChangeCallback(response) {
                     lat: response.data[i].place.location.latitude,
                     lng: response.data[i].place.location.longitude,
                     friendname: response.data[i].from.name,
-                    story: response.data[i].story,
+                    message: response.data[i].message,
                     placename: response.data[i].place.name,
                   }
 
@@ -157,9 +157,11 @@ var infoWindow = new google.maps.InfoWindow(), marker, i;
       // Allow each marker to have an info window    
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
           return function() {
-              infoWindow.setContent('<div class="info_content">' +
-                                    '<h3>'+markers[i].friendname+'</h3>' +
-                                    '<p> "'+markers[i].story+'"</p>' + '</div>');
+              if marker[i].hasOwnProperty('message'){
+                infoWindow.setContent('<div class="info_content">' +
+                      '<h3>'+markers[i].friendname+'</h3>' +
+                      '<p> "'+markers[i].message+'"</p>' + '</div>');
+              }
               infoWindow.open(map, marker);
           }
       })(marker, i));
