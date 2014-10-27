@@ -1,17 +1,3 @@
-
-// GOOGLE MAPS
-
-function initialize() {
-  var mapOptions = {
-    center: { lat: 43.076073222273, lng: -89.376661651794},
-    zoom: 8
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-
-
 //FACEBOOK
 
 // This is called with the results from from FB.getLoginStatus().
@@ -34,6 +20,8 @@ function statusChangeCallback(response) {
               var ul = document.getElementById('locationFeed');
               var body = document.getElementById('body');
 
+              markers = []
+
               for (var i in response['data']) {
                 if (response['data'][i].hasOwnProperty('place')) {
 
@@ -49,13 +37,15 @@ function statusChangeCallback(response) {
                   var lat = response.data[i].place.location.latitude;
                   var lng = response.data[i].place.location.longitude;
 
-                  friendlocation = function() {
+                  var friendlocation = function() {
                     this.lat = response.data[i].place.location.latitude;
                     this.lng = response.data[i].place.location.longitude;
                     this.friendname = response.data[i].from.name;
+                    this.story = response.data[i].story;
                     this.placename = response.data[i].place.name;
                   }
 
+                  markers.push(friendlocation);
                 }
               }
             body.appendChild(ul);
@@ -131,3 +121,40 @@ function testAPI() {
       'Thanks for logging in, ' + response.name + '!';
   });
 }
+
+
+// GOOGLE MAPS
+
+function initialize() {
+  var mapOptions = {
+    center: { lat: 43.076073222273, lng: -89.376661651794},
+    zoom: 8
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+      // Loop through our array of markers & place each one on the map  
+  for( i = 0; i < markers.length; i++ ) {
+      var position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
+      bounds.extend(position);
+      marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          title: markers[i].placename
+      });
+      
+      // Allow each marker to have an info window    
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+              infoWindow.setContent(infoWindowContent[i][0]);
+              infoWindow.open(map, marker);
+          }
+      })(marker, i));
+
+      // Automatically center the map fitting all markers on the screen
+      map.fitBounds(bounds);
+  }
+
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
