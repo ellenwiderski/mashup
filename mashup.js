@@ -137,11 +137,17 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function loadMarkers(markers) {
 
   var bounds = new google.maps.LatLngBounds();
+    
+// Display multiple markers on a map
+var infoWindow = new google.maps.InfoWindow(), marker, i;
+
 
   // Loop through our array of markers & place each one on the map  
   for( i = 0; i < markers.length; i++ ) {
+
       var position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
       bounds.extend(position);
+
       marker = new google.maps.Marker({
           position: position,
           map: map,
@@ -151,7 +157,9 @@ function loadMarkers(markers) {
       // Allow each marker to have an info window    
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
           return function() {
-              infoWindow.setContent(infoWindowContent[i][0]);
+              infoWindow.setContent('<div class="info_content">' +
+                                    '<h3>'+markers[i].friendname+'</h3>' +
+                                    '<p> "'+markers[i].story+'"</p>' + '</div>');
               infoWindow.open(map, marker);
           }
       })(marker, i));
