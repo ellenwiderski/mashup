@@ -17,22 +17,10 @@ function statusChangeCallback(response) {
           function(response) {
             if (response && !response.error) {
 
-              var ul = document.getElementById('locationFeed');
-              var body = document.getElementById('body');
-
               var markers = []
 
               for (var i in response['data']) {
                 if (response['data'][i].hasOwnProperty('place')) {
-
-                  //Store relevant map info
-
-                  var li = document.createElement('li');
-                  li.appendChild(document.createTextNode(response.data[i].from.name));
-                  li.appendChild(document.createTextNode(response.data[i].place.name));
-                  li.appendChild(document.createTextNode(response.data[i].place.location.latitude));
-                  li.appendChild(document.createTextNode(response.data[i].place.location.longitude));
-                  ul.appendChild(li);
 
                   friendlocation = {
                     lat: response.data[i].place.location.latitude,
