@@ -34,10 +34,7 @@ function statusChangeCallback(response) {
                   li.appendChild(document.createTextNode(response.data[i].place.location.longitude));
                   ul.appendChild(li);
 
-                  var lat = response.data[i].place.location.latitude;
-                  var lng = response.data[i].place.location.longitude;
-
-                  var friendlocation = function() {
+                  friendlocation = function() {
                     this.lat = response.data[i].place.location.latitude;
                     this.lng = response.data[i].place.location.longitude;
                     this.friendname = response.data[i].from.name;
