@@ -34,12 +34,12 @@ function statusChangeCallback(response) {
                   li.appendChild(document.createTextNode(response.data[i].place.location.longitude));
                   ul.appendChild(li);
 
-                  friendlocation = function() {
-                    this.lat = response.data[i].place.location.latitude;
-                    this.lng = response.data[i].place.location.longitude;
-                    this.friendname = response.data[i].from.name;
-                    this.story = response.data[i].story;
-                    this.placename = response.data[i].place.name;
+                  friendlocation = {
+                    lat = response.data[i].place.location.latitude,
+                    lng = response.data[i].place.location.longitude,
+                    friendname = response.data[i].from.name,
+                    story = response.data[i].story,
+                    placename = response.data[i].place.name,
                   }
 
                   markers.push(friendlocation);
