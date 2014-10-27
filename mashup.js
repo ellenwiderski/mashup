@@ -33,7 +33,6 @@ function statusChangeCallback(response) {
                   markers.push(friendlocation);
                 }
               }
-            body.appendChild(ul);
             }
             loadMarkers(markers);
           }
