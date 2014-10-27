@@ -144,7 +144,7 @@ var infoWindowContent = [];
 
 for (i = 0; i < markers.length; i++) {
 
-  if (marker[i].hasOwnProperty('message')) {
+  if (markers[i].hasOwnProperty('message')) {
     infoWindowContent.push('<div class="info_content">' +
           '<h3>'+markers[i].friendname+'</h3>' +
           '<p> "'+markers[i].message+'"</p>' + '</div>');
