@@ -20,7 +20,7 @@ function statusChangeCallback(response) {
               var ul = document.getElementById('locationFeed');
               var body = document.getElementById('body');
 
-              markers = []
+              var markers = []
 
               for (var i in response['data']) {
                 if (response['data'][i].hasOwnProperty('place')) {
@@ -50,6 +50,7 @@ function statusChangeCallback(response) {
               }
             body.appendChild(ul);
             }
+            loadMarkers(markers);
           }
       );
 
@@ -132,8 +133,13 @@ function initialize() {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
+  }
 
-      // Loop through our array of markers & place each one on the map  
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
+function loadMarkers(markers) {
+  // Loop through our array of markers & place each one on the map  
   for( i = 0; i < markers.length; i++ ) {
       var position = new google.maps.LatLng(markers[i].lat, markers[i].lng);
       bounds.extend(position);
@@ -153,8 +159,5 @@ function initialize() {
 
       // Automatically center the map fitting all markers on the screen
       map.fitBounds(bounds);
-  }
-
 }
-google.maps.event.addDomListener(window, 'load', initialize);
 
