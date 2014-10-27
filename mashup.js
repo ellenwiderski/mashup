@@ -26,15 +26,19 @@ function statusChangeCallback(response) {
     // Logged into your app and Facebook.
     testAPI();
     var count = 0;
-    var currenttime = new Date();
-    var weekAgo = currenttime.getTime() - 604800000;
-    FB.api("/me/home?limit=10",
+
+    FB.api("/me/home?limit=100",
           function(response) {
             if (response && !response.error) {
+
               var ul = document.getElementById('locationFeed');
               var body = document.getElementById('body');
+
               for (var i in response['data']) {
                 if (response['data'][i].hasOwnProperty('place')) {
+
+                  //Store relevant map info
+
                   var li = document.createElement('li');
                   li.appendChild(document.createTextNode(response.data[i].from.name));
                   li.appendChild(document.createTextNode(response.data[i].place.name));
@@ -44,11 +48,14 @@ function statusChangeCallback(response) {
 
                   var lat = response.data[i].place.location.latitude;
                   var lng = response.data[i].place.location.longitude;
-                  var myLatlng = new google.maps.LatLng(lat,lng);
-                  var marker = new google.maps.Marker({
-                                    position: myLatlng,
-                                    map: map,
-                                    title: 'Hello World!'});
+
+                  friendlocation = function() {
+                    this.lat = response.data[i].place.location.latitude;
+                    this.lng = response.data[i].place.location.longitude;
+                    this.friendname = response.data[i].from.name;
+                    this.placename = response.data[i].place.name;
+                  }
+
                 }
               }
             body.appendChild(ul);
