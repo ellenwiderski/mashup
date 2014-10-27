@@ -35,11 +35,11 @@ function statusChangeCallback(response) {
                   ul.appendChild(li);
 
                   friendlocation = {
-                    lat = response.data[i].place.location.latitude,
-                    lng = response.data[i].place.location.longitude,
-                    friendname = response.data[i].from.name,
-                    story = response.data[i].story,
-                    placename = response.data[i].place.name,
+                    lat: response.data[i].place.location.latitude,
+                    lng: response.data[i].place.location.longitude,
+                    friendname: response.data[i].from.name,
+                    story: response.data[i].story,
+                    placename: response.data[i].place.name,
                   }
 
                   markers.push(friendlocation);
