@@ -1,15 +1,3 @@
-// GOOGLE MAPS
-
-function initialize() {
-  var mapOptions = {
-    center: { lat: -34.397, lng: 150.644},
-    zoom: 8
-  };
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-
 //FACEBOOK
 
 // This is called with the results from from FB.getLoginStatus().
@@ -39,6 +27,14 @@ function statusChangeCallback(response) {
                   li.appendChild(document.createTextNode(response.data[i].place.location.latitude));
                   li.appendChild(document.createTextNode(response.data[i].place.location.longitude));
                   ul.appendChild(li);
+                  
+                  var lat = response.data[i].place.location.latitude;
+                  var lng = response.data[i].place.location.longitude;
+                  var myLatlng = new google.maps.LatLng(lat,lng);
+                  var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    map: map,
+                                    title: 'Hello World!'});
                 }
               }
             body.appendChild(ul);
@@ -114,3 +110,15 @@ function testAPI() {
       'Thanks for logging in, ' + response.name + '!';
   });
 }
+
+// GOOGLE MAPS
+
+function initialize() {
+  var mapOptions = {
+    center: { lat: -34.397, lng: 150.644},
+    zoom: 8
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
