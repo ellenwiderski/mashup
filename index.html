@@ -16,11 +16,13 @@
     the JavaScript SDK to present a graphical Login button that triggers
     the FB.login() function when clicked.
   -->
+
+  <div id="map-canvas"></div>
   <div id="fb-root"></div>
   <fb:login-button scope="public_profile,email,read_stream" onlogin="checkLoginState();">
   </fb:login-button>
 
   <div id="status"></div>
-  <div id="map-canvas"></div>
+  <ul id="locationFeed"></div>
   </body>
 </html>

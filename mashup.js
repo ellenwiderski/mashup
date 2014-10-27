@@ -17,7 +17,7 @@ function statusChangeCallback(response) {
     FB.api("/me/home?limit=10",
           function(response) {
             if (response && !response.error) {
-              var ul = document.createElement('ul');
+              var ul = document.getElementById('locationFeed');
               var body = document.getElementById('body');
               for (var i in response['data']) {
                 if (response['data'][i].hasOwnProperty('place')) {
