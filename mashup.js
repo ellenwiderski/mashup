@@ -134,7 +134,7 @@ for (i = 0; i < markers.length; i++) {
 
   if (markers[i].hasOwnProperty('message')) {
     infoWindowContent.push('<div class="info_content">' +
-          '<img src="https://graph.facebook.com/'+markers[i]friendid+'/picture">'+
+          '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture">'+
           '<h3>'+markers[i].friendname+'</h3>' +
           '<p> "'+markers[i].message+'"</p>' + '</div>');
   }
