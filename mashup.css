@@ -5,6 +5,7 @@ html, body, #map-canvas {
 }
 img {
 	display:inline;
+	padding:5px;
 }
 
 h3 {
