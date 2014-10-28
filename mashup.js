@@ -15,12 +15,14 @@ function statusChangeCallback(response) {
             {
               "with": "location"
           },
+
           function(response) {
             if (response && !response.error) {
 
               var markers = []
 
               for (var i in response['data']) {
+
                 friendlocation = {
                   lat: response.data[i].place.location.latitude,
                   lng: response.data[i].place.location.longitude,
@@ -28,14 +30,19 @@ function statusChangeCallback(response) {
                   friendid: response.data[i].from.id,
                   placename: response.data[i].place.name
                 }
+
                 if (response.data[i].hasOwnProperty('story')) {
-                  friendlocation.message = '"'+response.data[i].story+'"'
+                  friendlocation.message = '"'+response.data[i].story+'"';
                 }
                 else if (response.data[i].hasOwnProperty('message')) {
-                  friendlocation.message = '"'+response.data[i].message+'"'
+                  friendlocation.message = '"'+response.data[i].message+'"';
                 }
                 else {
                   friendlocation.message = "";
+                }
+
+                if (response.data[i].hasOwnProperty('picture')) {
+                  friendlocation.picture = response.data[i].picture;
                 }
                   markers.push(friendlocation);
                 }
@@ -137,17 +144,15 @@ function loadMarkers(markers) {
 
   for (i = 0; i < markers.length; i++) {
 
-    if (markers[i].hasOwnProperty('message')) {
-      infoWindowContent.push('<div class="info_content">' +
-            '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture">'+
+    var str = '<div class="info_content">' +
+            '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture" />'+
             '<h3>'+markers[i].friendname+'</h3>' +
-            '<p>'+markers[i].message+'</p>' + '</div>');
-    }
-    else {
-      infoWindowContent.push('<div class="info_content">' +
-          '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture">'+
-          '<h3>'+markers[i].friendname+'</h3>' + '</div>');
-    }
+            '<p>' + markers[i].message + '</p>'
+
+    if (markers[i].hasOwnProperty('picture')) {
+      str += '<img src="'+markers[i].picture+'" />'
+
+    infoWindowContent.push(str);
   }
 
 // Loop through our array of markers & place each one on the map  
