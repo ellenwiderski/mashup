@@ -148,8 +148,8 @@ function loadMarkers(markers) {
     var str = '<div class="info_content">' +
             '<a href="https://www.facebook.com/'+markers[i].friendid+'">'+
             '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture" />'+
-            +"</a>"+
             '<h3>'+markers[i].friendname+'</h3>' +
+            '</a>'+
             '<p>' + markers[i].message + '</p>'
 
     if (markers[i].hasOwnProperty('picture')) {
