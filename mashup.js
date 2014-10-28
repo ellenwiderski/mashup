@@ -146,7 +146,6 @@ function loadMarkers(markers) {
   for (i = 0; i < markers.length; i++) {
 
     var str = '<div class="info_content">' +
-            'a href='
             '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture" />'+
             '<h3>'+markers[i].friendname+'</h3>' +
             '<p>' + markers[i].message + '</p>'
