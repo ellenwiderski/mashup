@@ -29,10 +29,10 @@ function statusChangeCallback(response) {
                   friendid: response.data[i].from.id,
                   placename: response.data[i].place.name
                 }
-                if (response.data.hasOwnProperty('story')) {
+                if (response.data[i].hasOwnProperty('story')) {
                   friendlocation.message = '"'+response.data[i].story+'"'
                 }
-                else if (response.data.hasOwnProperty('message')) {
+                else if (response.data[i].hasOwnProperty('message')) {
                   friendlocation.message = '"'+response.data[i].story+'"'
                 }
                 else {
