@@ -11,30 +11,8 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     testAPI();
-    // var limit = 50;
-    // var done = false;
-    // var numStatuses = 0;
 
-    // while (! done) {
-    //   FB.api("/me/home?limit="+limit, function(response) {
-    //     numStatuses = 0;
-    //     if (response && !response.error) {
-    //       for (var i in response.data) {
-    //         if (response.data[i].hasOwnProperty('place')) {
-    //           numStatuses += 1;
-    //         }
-    //       }
-    //     }
-    //   })
-    //   if (numStatuses < 15) {
-    //     limit += 50;
-    //   }
-    //   else {
-    //     done = true;
-    //   }
-    // }
-
-    FB.api("/me/home?limit=50",
+    FB.api("/me/home?limit=15",
             {
               "with": "location"
           },
