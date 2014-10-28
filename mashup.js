@@ -138,6 +138,12 @@ for (i = 0; i < markers.length; i++) {
           '<h3>'+markers[i].friendname+'</h3>' +
           '<p> "'+markers[i].message+'"</p>' + '</div>');
   }
+  else {
+    infoWindowContent.push('<div class="info_content">' +
+        '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture">'+
+        '<h3>'+markers[i].friendname+'</h3>' + '</div>');
+  }
+  }
 }
 
 // Loop through our array of markers & place each one on the map  
