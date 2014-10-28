@@ -14,7 +14,7 @@ function statusChangeCallback(response) {
 
     FB.api("/me/home",
             {
-              "with": "place"
+              "with": "location"
           },
           function(response) {
             if (response && !response.error) {
