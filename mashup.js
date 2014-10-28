@@ -13,6 +13,7 @@ function statusChangeCallback(response) {
     testAPI();
     var limit = 50;
     var done = false;
+    var numStatuses = 0;
 
     while (! done) {
       FB.api("/me/home?limit="+limit, function(response) {
