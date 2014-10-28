@@ -12,7 +12,7 @@ function statusChangeCallback(response) {
     // Logged into your app and Facebook.
     testAPI();
 
-    FB.api("/me/home",
+    FB.api("/me/home?limit=15",
             {
               "with": "location"
           },
