@@ -34,8 +34,8 @@ function statusChangeCallback(response) {
                   markers.push(friendlocation);
                 }
               }
+              loadMarkers(markers);
             }
-            loadMarkers(markers);
           }
       );
 
