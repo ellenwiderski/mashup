@@ -11,9 +11,29 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     testAPI();
-    var count = 0;
+    var limit = 50;
+    var done = false;
 
-    FB.api("/me/home?limit=50",
+    while (! done) {
+      FB.api("/me/home?limit="+limit, function(response) {
+        numStatuses = 0;
+        if (response && !response.error) {
+          for (var i in response.data) {
+            if (response.data[i].hasOwnProperty('place')) {
+              numStatuses += 1;
+            }
+          }
+        }
+      })
+      if (numStatuses < 15) {
+        limit += 50;
+      }
+      else {
+        done = true;
+      }
+    }
+
+    FB.api("/me/home?limit="+limit,
           function(response) {
             if (response && !response.error) {
 
@@ -127,22 +147,22 @@ function loadMarkers(markers) {
   var bounds = new google.maps.LatLngBounds();
     
 // Display multiple markers on a map
-var infoWindow = new google.maps.InfoWindow(), marker, i;
-var infoWindowContent = [];
+  var infoWindow = new google.maps.InfoWindow(), marker, i;
+  var infoWindowContent = [];
 
-for (i = 0; i < markers.length; i++) {
+  for (i = 0; i < markers.length; i++) {
 
-  if (markers[i].hasOwnProperty('message')) {
-    infoWindowContent.push('<div class="info_content">' +
+    if (markers[i].hasOwnProperty('message')) {
+      infoWindowContent.push('<div class="info_content">' +
+            '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture">'+
+            '<h3>'+markers[i].friendname+'</h3>' +
+            '<p> "'+markers[i].message+'"</p>' + '</div>');
+    }
+    else {
+      infoWindowContent.push('<div class="info_content">' +
           '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture">'+
-          '<h3>'+markers[i].friendname+'</h3>' +
-          '<p> "'+markers[i].message+'"</p>' + '</div>');
-  }
-  else {
-    infoWindowContent.push('<div class="info_content">' +
-        '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture">'+
-        '<h3>'+markers[i].friendname+'</h3>' + '</div>');
-  }
+          '<h3>'+markers[i].friendname+'</h3>' + '</div>');
+    }
   }
 }
 
