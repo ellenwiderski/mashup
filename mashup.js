@@ -11,7 +11,6 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     testAPI();
-
     FB.api("/me/home",
             {
               "with": "location"
