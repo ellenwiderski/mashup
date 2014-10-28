@@ -113,8 +113,8 @@ function testAPI() {
 
 function initialize() {
   var mapOptions = {
-    center: { lat: 43.076073222273, lng: -89.376661651794},
-    zoom: 8
+    center: { lat: 0, lng: 0},
+    zoom: 0
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
