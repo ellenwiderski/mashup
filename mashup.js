@@ -151,7 +151,8 @@ function loadMarkers(markers) {
 
     if (markers[i].hasOwnProperty('picture')) {
       str += '<img src="'+markers[i].picture+'" />'
-
+    }
+    
     infoWindowContent.push(str);
   }
 
@@ -179,4 +180,4 @@ for( i = 0; i < markers.length; i++ ) {
     // Automatically center the map fitting all markers on the screen
     map.fitBounds(bounds);
   }
-} 
+}
