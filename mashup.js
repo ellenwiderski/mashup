@@ -26,8 +26,9 @@ function statusChangeCallback(response) {
                     lat: response.data[i].place.location.latitude,
                     lng: response.data[i].place.location.longitude,
                     friendname: response.data[i].from.name,
+                    friendid: response.data[i].from.id,
                     message: response.data[i].message,
-                    placename: response.data[i].place.name,
+                    placename: response.data[i].place.name
                   }
 
                   markers.push(friendlocation);
@@ -133,6 +134,7 @@ for (i = 0; i < markers.length; i++) {
 
   if (markers[i].hasOwnProperty('message')) {
     infoWindowContent.push('<div class="info_content">' +
+          '<img src="https://graph.facebook.com/'+markers[i]friendid+'/picture">'+
           '<h3>'+markers[i].friendname+'</h3>' +
           '<p> "'+markers[i].message+'"</p>' + '</div>');
   }
