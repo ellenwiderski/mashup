@@ -22,15 +22,22 @@ function statusChangeCallback(response) {
               var markers = []
 
               for (var i in response['data']) {
-                  friendlocation = {
-                    lat: response.data[i].place.location.latitude,
-                    lng: response.data[i].place.location.longitude,
-                    friendname: response.data[i].from.name,
-                    friendid: response.data[i].from.id,
-                    message: response.data[i].message,
-                    placename: response.data[i].place.name
-                  }
-
+                friendlocation = {
+                  lat: response.data[i].place.location.latitude,
+                  lng: response.data[i].place.location.longitude,
+                  friendname: response.data[i].from.name,
+                  friendid: response.data[i].from.id,
+                  placename: response.data[i].place.name
+                }
+                if (response.data.hasOwnProperty('story')) {
+                  friendlocation.message = '"'+response.data[i].story+'"'
+                }
+                else if (response.data.hasOwnProperty('message') {
+                  friendlocation.message = '"'+response.data[i].story+'"'
+                }
+                else {
+                  friendlocation.message = "";
+                }
                   markers.push(friendlocation);
                 }
               loadMarkers(markers);
@@ -135,7 +142,7 @@ function loadMarkers(markers) {
       infoWindowContent.push('<div class="info_content">' +
             '<img src="https://graph.facebook.com/'+markers[i].friendid+'/picture">'+
             '<h3>'+markers[i].friendname+'</h3>' +
-            '<p> "'+markers[i].message+'"</p>' + '</div>');
+            '<p>'+markers[i].message+'</p>' + '</div>');
     }
     else {
       infoWindowContent.push('<div class="info_content">' +
