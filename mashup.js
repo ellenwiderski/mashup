@@ -32,7 +32,7 @@ function statusChangeCallback(response) {
                 if (response.data.hasOwnProperty('story')) {
                   friendlocation.message = '"'+response.data[i].story+'"'
                 }
-                else if (response.data.hasOwnProperty('message') {
+                else if (response.data.hasOwnProperty('message')) {
                   friendlocation.message = '"'+response.data[i].story+'"'
                 }
                 else {
