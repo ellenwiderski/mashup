@@ -33,11 +33,10 @@ function statusChangeCallback(response) {
 
                   markers.push(friendlocation);
                 }
-              }
               loadMarkers(markers);
+              }
             }
-          }
-      );
+        );
 
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
