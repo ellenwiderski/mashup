@@ -10,3 +10,7 @@ img {
 h3 {
 	display:inline;
 }
+
+p {
+	font-style:italic;
+}
